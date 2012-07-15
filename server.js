@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
       host: req.headers.host
     });
   } else {
-    var externalReqHeaders = except(req.headers, 'accept-encoding', 'connection', 'cookie', 'host', 'user-agent');
+    var externalReqHeaders = except(req.headers, 'accept-encoding', 'host'); // 'accept-encoding', 'connection', 'cookie', 'host', 'user-agent');
     externalReqHeaders.accept = 'application/json';
 
     request({
@@ -72,6 +72,6 @@ app.get('/', function(req, res) {
 });
 
 
-var apiPort = process.argv[2] || 8000;
+var apiPort = process.argv[2] || process.env.PORT || 8000;
 app.listen(apiPort);
 console.log('Server running at http://127.0.0.1:' + apiPort);
